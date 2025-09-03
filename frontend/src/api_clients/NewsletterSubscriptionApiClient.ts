@@ -1,7 +1,12 @@
-import { NewsletterSubscriptionControllerApi } from "../types";
-const OPEN_API_CONFIG = {};
+import { NewsletterSubscriptionControllerApi, Configuration } from "../types";
+
+// eigene Base-URL definieren
+const OPEN_API_CONFIG = new Configuration({
+  basePath: "http://localhost:8080" 
+})
+
 const NEWSLETTER_API = {
-  subscribtion: new NewsletterSubscriptionControllerApi(),
+  subscription: new NewsletterSubscriptionControllerApi(OPEN_API_CONFIG),
 };
 
 export default NEWSLETTER_API;

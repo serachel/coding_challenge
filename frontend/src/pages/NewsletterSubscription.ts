@@ -23,7 +23,7 @@ export class NewsletterSubscription extends LitElement {
   }
 
   private _onClick() {
-    NEWSLETTER_API.subscribtion
+    NEWSLETTER_API.subscription
       .createEmailSubscription({ createNewsletterSubscriptionRequestDto: { email: this.email } })
       .then(() => {
         this.sucess = true;
