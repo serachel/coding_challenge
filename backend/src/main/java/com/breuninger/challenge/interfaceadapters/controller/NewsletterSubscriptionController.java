@@ -13,7 +13,6 @@ import com.breuninger.challenge.interfaceadapters.controller.requests.CreateNews
 
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
-import com.breuninger.challenge.domainmodel.NewsletterSubscription;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController

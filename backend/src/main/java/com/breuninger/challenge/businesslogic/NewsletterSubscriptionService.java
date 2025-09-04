@@ -12,6 +12,9 @@ import java.util.regex.Pattern;
 
 import org.modelmapper.ModelMapper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 public class NewsletterSubscriptionService {
 
@@ -23,6 +26,8 @@ public class NewsletterSubscriptionService {
     @Autowired
     private MessageProducer messageProducer;
 
+    private static final Logger logger = LoggerFactory.getLogger(NewsletterSubscriptionService.class);
+    
     private static final String EMAIL_REGEX = "^((?:[A-Za-z0-9!#$%&'*+\\-\\/=?^_`{|}~]|(?<=^|\\.)\"|\"(?=$|\\.|@)|(?<=\".*)[ .](?=.*\")|(?<!\\.)\\.){1,64})(@)((?:[A-Za-z0-9.\\-])*(?:[A-Za-z0-9])\\.(?:[A-Za-z0-9]){2,})$";
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
@@ -39,9 +44,10 @@ public class NewsletterSubscriptionService {
 
             newsletterSubscriptionRepository.save(newsletterSubscription);
             messageProducer.sendNewsletterMessage( newsletterSubscription);
-            System.err.println("Message sent to Kafka: " + newsletterSubscription.getEmail());
+            
+            logger.info("Message sent to Kafka");
         } else {
-
+            logger.error("Invalid email format");
             throw new IllegalArgumentException("Invalid email format");
         }
     }
