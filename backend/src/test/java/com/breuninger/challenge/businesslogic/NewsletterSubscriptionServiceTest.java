@@ -2,6 +2,7 @@ package com.breuninger.challenge.businesslogic;
 
 import com.breuninger.challenge.domainmodel.NewsletterSubscription;
 import com.breuninger.challenge.interfaceadapters.controller.requests.CreateNewsletterSubscriptionRequestDto;
+import com.breuninger.challenge.interfaceadapters.kafka.MessageProducer;
 import com.breuninger.challenge.interfaceadapters.repository.NewsletterSubscriptionRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,9 @@ class NewsletterSubscriptionServiceTest {
 
     @Mock
     private ModelMapper modelMapper;
+
+    @Mock
+    private MessageProducer messageProducer;
 
     @InjectMocks
     private NewsletterSubscriptionService classUnderTest;    

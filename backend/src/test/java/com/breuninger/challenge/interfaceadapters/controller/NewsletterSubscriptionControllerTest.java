@@ -21,7 +21,7 @@ class NewsletterSubscriptionControllerTest {
     private NewsletterSubscriptionService newsletterSubscriptionService;
 
     @InjectMocks
-    private NewsletterSubscriptionController controller;
+    private NewsletterSubscriptionController classUnderTest;
 
     @Test
     void shouldReturn201WhenEmailIsValid() {
@@ -31,7 +31,7 @@ class NewsletterSubscriptionControllerTest {
 
         doNothing().when(newsletterSubscriptionService).saveNewsletterSubscription(dto);
 
-        ResponseEntity<Void> response = controller.createEmailSubscription(dto);
+        ResponseEntity<Void> response = classUnderTest.createEmailSubscription(dto);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
@@ -44,7 +44,7 @@ class NewsletterSubscriptionControllerTest {
         doThrow(new IllegalArgumentException("Invalid email format"))
                 .when(newsletterSubscriptionService).saveNewsletterSubscription(dto);
 
-        ResponseEntity<Void> response = controller.createEmailSubscription(dto);
+        ResponseEntity<Void> response = classUnderTest.createEmailSubscription(dto);
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
