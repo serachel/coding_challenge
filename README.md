@@ -21,23 +21,23 @@
 
 ### Containerisierung
 To run the backend and frontend with docker run the following commands
-`docker-compose up -d`
+* `docker-compose up -d`
 
-`docker run -d --name coding_challenge  -e POSTGRES_USER=myuser -e POSTGRES_PASSWORD=mypassword   -e POSTGRES_DB=challenge_db -p 5432:5432 postgres:17`
+*  `docker run -d --name coding_challenge  -e POSTGRES_USER=myuser -e POSTGRES_PASSWORD=mypassword   -e POSTGRES_DB=challenge_db -p 5432:5432 postgres:17`
 
-`docker build -t coding-challenge-breuninger .` in the backend folder
+* `docker build -t coding-challenge-breuninger .` in the backend folder
 
-`docker network create my-network`
+* `docker network create my-network`
 
-`docker network connect my-network coding_challenge`
+* `docker network connect my-network coding_challenge`
 
-`docker network connect coding_challenge_default coding-challenge-breuninger`
+* `docker network connect coding_challenge_default coding-challenge-breuninger`
 
 
-`docker run -d   --name coding-challenge-breuninger   --network my-network  --network coding_challenge_default -e SPRING_DATASOURCE_URL=jdbc:postgresql://coding_challenge:5432/challenge_db   -e SPRING_DATASOURCE_USERNAME=myuser   -e SPRING_DATASOURCE_PASSWORD=mypassword  -e SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092  -p 8080:8080   coding-challenge-breuninger`
+* `docker run -d   --name coding-challenge-breuninger   --network my-network  --network coding_challenge_default -e SPRING_DATASOURCE_URL=jdbc:postgresql://coding_challenge:5432/challenge_db   -e SPRING_DATASOURCE_USERNAME=myuser   -e SPRING_DATASOURCE_PASSWORD=mypassword  -e SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092  -p 8080:8080   coding-challenge-breuninger`
 
-`docker build -t coding-challenge-breuninger-frontend .`
-`docker run -it -p 5173:5173 coding-challenge-breuninger-frontend`
+* `docker build -t coding-challenge-breuninger-frontend .`
+* `docker run -it -p 5173:5173 coding-challenge-breuninger-frontend`
 
 ### Lokales und Cloud-basiertes Deployment
 
