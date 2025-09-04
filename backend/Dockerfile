@@ -1,6 +1,5 @@
 FROM openjdk:21-jdk-slim
 
-# Gruppe und Benutzer anlegen (Debian/Ubuntu Syntax)
 RUN groupadd -r spring && useradd -r -g spring spring
 
 USER spring

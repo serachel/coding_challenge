@@ -18,6 +18,7 @@ export class EmailInput extends LitElement {
   private validateEmail(email: string): boolean {
     return this.emailRegex.test(email);
   }
+  
   private dispatchErrorEvent() {
     this.dispatchEvent(
       new CustomEvent("error-changed", {
@@ -27,6 +28,7 @@ export class EmailInput extends LitElement {
       }),
     );
   }
+
   private handleInput(e: Event) {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
@@ -39,7 +41,7 @@ export class EmailInput extends LitElement {
       this.error = true;
       this.dispatchErrorEvent();
     }
-    // CustomEvent feuern, damit Elternkomponente den Wert bekommt
+
     this.dispatchEvent(
       new CustomEvent("value-changed", {
         detail: { value: this.value },
@@ -48,6 +50,7 @@ export class EmailInput extends LitElement {
       }),
     );
   }
+
   render() {
     return html`
       <link rel="stylesheet" href="./src/index.css" />

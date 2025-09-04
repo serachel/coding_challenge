@@ -1,6 +1,5 @@
 import { NewsletterSubscriptionControllerApi, Configuration } from "../types";
 
-// eigene Base-URL definieren
 const OPEN_API_CONFIG = new Configuration({
   basePath: "http://localhost:8080",
 });
