@@ -2,6 +2,7 @@ package com.breuninger.challenge.businesslogic;
 
 import com.breuninger.challenge.domainmodel.NewsletterSubscription;
 import com.breuninger.challenge.interfaceadapters.controller.requests.CreateNewsletterSubscriptionRequestDto;
+import com.breuninger.challenge.interfaceadapters.kafka.MessageProducer;
 import com.breuninger.challenge.interfaceadapters.repository.NewsletterSubscriptionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class NewsletterSubscriptionService {
     private NewsletterSubscriptionRepository newsletterSubscriptionRepository;
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private MessageProducer messageProducer;
+
     private static final String EMAIL_REGEX = "^((?:[A-Za-z0-9!#$%&'*+\\-\\/=?^_`{|}~]|(?<=^|\\.)\"|\"(?=$|\\.|@)|(?<=\".*)[ .](?=.*\")|(?<!\\.)\\.){1,64})(@)((?:[A-Za-z0-9.\\-])*(?:[A-Za-z0-9])\\.(?:[A-Za-z0-9]){2,})$";
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
@@ -33,6 +38,8 @@ public class NewsletterSubscriptionService {
                     NewsletterSubscription.class);
 
             newsletterSubscriptionRepository.save(newsletterSubscription);
+            messageProducer.sendNewsletterMessage( newsletterSubscription);
+            System.err.println("Message sent to Kafka: " + newsletterSubscription.getEmail());
         } else {
 
             throw new IllegalArgumentException("Invalid email format");
