@@ -18,7 +18,7 @@ export class EmailInput extends LitElement {
   private validateEmail(email: string): boolean {
     return this.emailRegex.test(email);
   }
-  
+
   private dispatchErrorEvent() {
     this.dispatchEvent(
       new CustomEvent("error-changed", {
@@ -51,6 +51,18 @@ export class EmailInput extends LitElement {
     );
   }
 
+  private handleKeyDown(e: KeyboardEvent) {
+    if (e.key === "Enter") {
+      const form = this.closest("form");
+      if (form && !this.error) {
+        e.preventDefault();
+        form.requestSubmit
+          ? form.requestSubmit()
+          : form.dispatchEvent(new Event("submit", { cancelable: true }));
+      }
+    }
+  }
+
   render() {
     return html`
       <link rel="stylesheet" href="./src/index.css" />
@@ -78,6 +90,7 @@ export class EmailInput extends LitElement {
             placeholder="user@mail.com"
             .value=${this.value}
             @input=${this.handleInput}
+            @keydown=${this.handleKeyDown}
           />
           ${this.error
             ? html`<svg
