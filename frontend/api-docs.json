@@ -1,53 +1,51 @@
 {
-    "openapi": "3.0.1",
-    "info": {
-        "title": "OpenAPI definition",
-        "version": "v0"
-    },
-    "servers": [
-        {
-            "url": "http://localhost:8080",
-            "description": "Generated server url"
-        }
-    ],
-    "paths": {
-        "/newsletter-subscription": {
-            "post": {
-                "tags": [
-                    "newsletter-subscription-controller"
-                ],
-                "operationId": "createEmailSubscription",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateNewsletterSubscriptionRequestDto"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "201": {
-                        "description": "Created"
-                    }
-                }
-            }
-        }
-    },
-    "components": {
-        "schemas": {
-            "CreateNewsletterSubscriptionRequestDto": {
-                "type": "object",
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    }
-                }
-            }
-        }
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
     }
+  ],
+  "paths": {
+    "/newsletter-subscription": {
+      "post": {
+        "tags": ["newsletter-subscription-controller"],
+        "operationId": "createEmailSubscription",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNewsletterSubscriptionRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateNewsletterSubscriptionRequestDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
 }
