@@ -1,11 +1,9 @@
 # Coding challenge
 
 
-
-
 ## Building and running the application
 
-* **Run Postgres DB**: `docker run --name coding_challenge -e POSTGRES_USER=myuser -e POSTGRES_PASSWORD=mypassword -e POSTGRES_DB=challenge_db -p 5432:5432 -d postgres:16` 
+* **Run Postgres DB**: `docker run --name coding_challenge -e POSTGRES_USER=myuser -e POSTGRES_PASSWORD=mypassword -e POSTGRES_DB=challenge_db -p 5432:5432 -d postgres:17` 
 * **Run Kafka**: run `docker-compose up -d` in the backend directory
 * **Run backend**: `mvn clean install` and `mvn spring-boot:run`
 * **Install frontend dependencies**: `npm install`
@@ -39,8 +37,10 @@ To run the backend and frontend with docker run the following commands
 * `docker build -t coding-challenge-breuninger-frontend .`
 * `docker run -it -p 5173:5173 coding-challenge-breuninger-frontend`
 
-### Lokales und Cloud-basiertes Deployment
+## Lokales und Cloud-basiertes Deployment
 
-Für das lokale Deployment der Anwendung verfolgen wir die Strategie, alle zentralen Komponenten, wie Datenbank, Kafka, Backend und Frontend, innerhalb von Docker-Containern zu betreiben und diese über Docker Compose zu orchestrieren. Ziel ist es, eine einheitliche und sofort einsatzbereite Entwicklungsumgebung zu schaffen. Durch die Möglichkeit, die gesamte Umgebung mit einem einzigen Befehl zu starten, wird die Effizienz bei der lokalen Entwicklung deutlich gesteigert, Fehlerquellen werden reduziert und die Einarbeitung neuer Entwicklerinnen und Entwickler beschleunigt.
+Für das lokale Deployment der Anwendung verfolgen wir eine Strategie, die auf Docker Compose basiert. Alle zentralen Bestandteile, wie Datenbank, Kafka, Backend und Frontend, werden in separaten Containern gebündelt und gemeinsam orchestriert. Dadurch lässt sich die komplette Umgebung mit nur einem einzigen Befehl starten. Diese Vorgehensweise ermöglicht es, schnell und konsistent auf eine voll funktionsfähige Umgebung zuzugreifen, ohne die einzelnen Komponenten manuell konfigurieren oder betreiben zu müssen.
 
-Für das cloudbasierte Deployment setzen wir auf eine Strategie, die Skalierbarkeit, Automatisierung und Sicherheit miteinander vereint. Die Anwendung wird weiterhin in Docker-Containern betrieben, die jedoch durch Kubernetes orchestriert werden. Helm-Charts ermöglichen ein reproduzierbares und versionierbares Deployment, das flexibel an unterschiedliche Umgebungen angepasst werden kann. Ergänzend sorgt die CI/CD-Pipeline dafür, dass vor jedem Deployment automatisiert Tests, Testabdeckung und Sicherheitsprüfungen wie Trivy-Scans ausgeführt werden. So wird sichergestellt, dass nur getestete, stabile und sichere Versionen der Anwendung in der Cloud bereitgestellt werden.
+Im cloudbasierten Deployment liegt der Fokus auf Skalierbarkeit, Automatisierung und Sicherheit. Die Anwendung wird weiterhin in Docker-Containern betrieben, die über Kubernetes orchestriert werden. Mithilfe von Terraform wird die benötigte Cloud-Infrastruktur, wie Cluster, Netzwerke oder Datenbanken, reproduzierbar und versionierbar bereitgestellt. Anschließend übernehmen Helm-Charts die Installation und Konfiguration der Anwendungen innerhalb des Kubernetes-Clusters. Eingebettet ist dieser Prozess in eine CI/CD-Pipeline, die vor jedem Deployment automatisierte Tests, Testabdeckungsanalysen und Codequalitätsmetriken wie SonarQube sowie Sicherheitsprüfungen, etwa mit Trivy-Scans, ausführt. Dadurch wird sichergestellt, dass ausschließlich geprüfte, stabile und sichere Versionen der Anwendung in der Cloud verfügbar gemacht werden.
+
+(Dieser Text wurde mit Hilfe von ChatGPT auf Basis eigenständig erstellter Stichpunkten verfasst. Bei der Entwicklung habe ich Copilot verwendet. Hierbei nutzte ich vor allem die Autovervollständigung.)
