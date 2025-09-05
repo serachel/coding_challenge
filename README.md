@@ -5,17 +5,17 @@
 
 * **Run Postgres DB**: `docker run --name coding_challenge -e POSTGRES_USER=myuser -e POSTGRES_PASSWORD=mypassword -e POSTGRES_DB=challenge_db -p 5432:5432 -d postgres:17` 
 * **Run Kafka**: run `docker-compose up -d` in the backend directory
-* **Run backend**: `mvn clean install` and `mvn spring-boot:run`
-* **Install frontend dependencies**: `npm install`
-* **Run frontend**: `npm run dev`
+* **Run backend**: `mvn clean install` and `mvn spring-boot:run` in the backend directory
+* **Install frontend dependencies**: `npm install` in the frontend directory
+* **Run frontend**: `npm run dev` in the frontend directory
 
 
 ### Testing 
-* **Run backend tests**:  `mvn verify`
-* **Run cypress tests**: `npx cypress run --headless --component`
+* **Run backend tests**:  `mvn verify` in the backend directory
+* **Run cypress tests**: `npx cypress run --headless --component` in the frontend directory
 
 ### Updating api in forntend
-* **Run open api**: `npx @openapitools/openapi-generator-cli generate -i api-docs.json -g typescript-fetch   -o src/types --additional-properties=typescriptThreePlus=true`
+* **Run open api**: `npx @openapitools/openapi-generator-cli generate -i api-docs.json -g typescript-fetch   -o src/types --additional-properties=typescriptThreePlus=true` in the frontend directory
 
 ### Containerisierung
 To run the backend and frontend with docker run the following commands
@@ -23,7 +23,7 @@ To run the backend and frontend with docker run the following commands
 
 *  `docker run -d --name coding_challenge  -e POSTGRES_USER=myuser -e POSTGRES_PASSWORD=mypassword   -e POSTGRES_DB=challenge_db -p 5432:5432 postgres:17`
 
-* `docker build -t coding-challenge-breuninger .` in the backend folder
+* `docker build -t coding-challenge-breuninger .` in the backend directory
 
 * `docker network create my-network`
 
@@ -34,7 +34,7 @@ To run the backend and frontend with docker run the following commands
 
 * `docker run -d   --name coding-challenge-breuninger   --network my-network  --network coding_challenge_default -e SPRING_DATASOURCE_URL=jdbc:postgresql://coding_challenge:5432/challenge_db   -e SPRING_DATASOURCE_USERNAME=myuser   -e SPRING_DATASOURCE_PASSWORD=mypassword  -e SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092  -p 8080:8080   coding-challenge-breuninger`
 
-* `docker build -t coding-challenge-breuninger-frontend .`
+* `docker build -t coding-challenge-breuninger-frontend .` in the frontend directory
 * `docker run -it -p 5173:5173 coding-challenge-breuninger-frontend`
 
 ## Lokales und Cloud-basiertes Deployment
